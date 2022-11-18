@@ -26,7 +26,7 @@ var questions = [
     {
         title: "Who is my favorite Baseball Team?",
         options: ["San Francisco Giants", "Atlanta Braves", "Houston Astros", "New York Yankees"],
-        answer: "Atlanta Braves "
+        answer: "Atlanta Braves"
     },
     {
         title: "Who is my favorite Football Team?",
