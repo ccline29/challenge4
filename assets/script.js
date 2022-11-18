@@ -4,13 +4,13 @@ var score = 0;
 var questionIndex = 0;
 var currentTime = document.querySelector("#currentTime");
 var timer = document.querySelector("#startTimer");
-var questionsSection = document.querySelector("#questionsSection");
+var questioncontainer = document.querySelector("#questioncontainer");
 var quizContainer = document.querySelector("#quizContainer");
-var allScores = JSON.parse(localStorage.getItem("allScores")) || [];
+var totalScores = JSON.parse(localStorage.getItem("totalScores")) || [];
 
 // Quiz time remaining
 
-var secondsLeft = 93;
+var secondsLeft = 95;
 
 // Interval time
 
@@ -18,48 +18,42 @@ var holdInterval = 0;
 
 // Penalty 10 seconds
 
-var penalty = 10;
+var loss = 10;
 
 // Quiz questions array
 
 var questions = [
     {
-        title: "What is my favorite Baseball team?",
-        options: ["Atlanta Braves()", "San Francisco Giants()", "Houston Astros", "New York Yankees()"],
-        answer: "Atlanta Braves()"
+        title: "Who is my favorite Baseball Team?",
+        options: ["San Francisco Giants", "Atlanta Braves", "Houston Astros", "New York Yankees"],
+        answer: "Atlanta Braves "
     },
     {
-        title: "What is my favorite Football Team?",
-        options: ["Dallas Cowboys", "Pittsburgh Steelers)", "New York Giants", "San Francisco 49ers"],
+        title: "Who is my favorite Football Team?",
+        options: ["Dallas Cowboys", "Pittsburgh Steelers", "New York Giants", "San Francisco 49ers"],
         answer: "New York Giants"
     },
     {
         title: "Where is my next vacation?",
-        options: ["Paris, France", "Cozumel, Mexico", "Orlando, Florida", "Nashville, Tennessee"],
+        options: ["Orlando, Florida", "Nashville, Tennessee", "Cozumel, Mexico", "Las Vegas, Nevada"],
         answer: "Cozumel, Mexico"
     },
     {
         title: "Where would I like to go on vacation?",
-        options: ["Rome, Italy", "Athens, Greece", "Las Vegas, Nevada", "Nashville, Tennessee"],
+        options: ["Nashville, Tennessee", "Las Vegas, Nevada", "Athens, Greece", "Rome, Italy"],
         answer: "Rome, Italy"
     },
     {
-        title: "What is on my bucket list?",
-        options: ["Skydive", "Visit all 50 states", "Visit all 32 baseball stadiums", "Visit Great Wall of China"],
+        title: "What is on my Bucket List?",
+        options: ["Visit all 32 baseball stadiums", "Skydive", "Visit Great Wall of China", "Visit Australia"],
         answer: "Visit all 32 baseball stadiums"
     },
 
 ];
 
-// Check questions array in console log
-
-console.log(questions);
-
 // Create ul for quiz questions
 
 var ulEl = document.createElement("ul");
-console.log(ulEl);
-console.log(timer);
 if (timer !== null) {
     timer.addEventListener("click", function () {
         if (holdInterval === 0) {
@@ -70,22 +64,21 @@ if (timer !== null) {
                 if (secondsLeft <= 0) {
                     clearInterval(holdInterval);
                     quizComplete();
-                    currentTime.textContent = "GAME OVER! TRY AGAIN?";
+                    currentTime.textContent = "GAME OVER!";
                 }
             }, 1000);
         }
         render(questionIndex);
     });
 }
-console.log(questionIndex);
 
 // Renders questions
 
 function render(questionIndex) {
 
+    // Clears existing data 
 
-
-    questionsSection.innerHTML = "";
+    questioncontainer.innerHTML = "";
     ulEl.innerHTML = "";
 
     // Loop through questions array
@@ -94,14 +87,14 @@ function render(questionIndex) {
         // Appends question title only
         var userQuestion = questions[questionIndex].title;
         var userChoices = questions[questionIndex].options;
-        questionsSection.textContent = userQuestion;
+        questioncontainer.textContent = userQuestion;
     }
     // New for each for question
 
     userChoices.forEach(function (newItem) {
         var listItem = document.createElement("li");
         listItem.textContent = newItem;
-        questionsSection.appendChild(ulEl);
+        questioncontainer.appendChild(ulEl);
         ulEl.appendChild(listItem);
         listItem.addEventListener("click", (compare));
     })
@@ -120,14 +113,14 @@ function compare(event) {
 
         if (element.textContent == questions[questionIndex].answer) {
             score++;
-            answerDiv.textContent = "YES! The answer is:  " + questions[questionIndex].answer;
+            answerDiv.textContent = "CORRECT! The answer is:  " + questions[questionIndex].answer;
         }
         else {
 
             // Will deduct 10 seconds off secondsLeft for wrong answers
 
-            secondsLeft = secondsLeft - penalty;
-            answerDiv.textContent = "NO! The correct answer is:  " + questions[questionIndex].answer;
+            secondsLeft = secondsLeft - loss;
+            answerDiv.textContent = "INCORRECT! The correct answer is:  " + questions[questionIndex].answer;
         }
 
     }
@@ -138,32 +131,32 @@ function compare(event) {
 
     if (questionIndex >= questions.length) {
         quizComplete();
-        answerDiv.textContent = "DONE!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
+        answerDiv.textContent = "GAME OVER!" + " " + "You got  " + score + "/" + questions.length + " Correct!";
     }
     else {
         render(questionIndex);
     }
-    questionsSection.appendChild(answerDiv);
+    questioncontainer.appendChild(answerDiv);
 
 }
 // Quiz complete clear questionsSection
 
 function quizComplete() {
-    questionsSection.innerHTML = "";
+    questioncontainer.innerHTML = "";
     currentTime.innerHTML = "";
 
     // Create h1, p elements
 
     var h1El = document.createElement("h1");
     h1El.setAttribute("id", "h1El");
-    h1El.textContent = "Quiz Complete!"
+    h1El.textContent = "GAME OVER!"
 
-    questionsSection.appendChild(h1El);
+    questioncontainer.appendChild(h1El);
 
     var pEl = document.createElement("p");
     pEl.setAttribute("id", "pEl");
 
-    questionsSection.appendChild(pEl);
+    questioncontainer.appendChild(pEl);
 
     // Calculates time remaining and creates score
 
@@ -171,57 +164,55 @@ function quizComplete() {
         var timeRemaining = secondsLeft;
         var pEl2 = document.createElement("p");
         clearInterval(holdInterval);
-        pEl.textContent = "Your final score is: " + timeRemaining;
+        pEl.textContent = "Your total score is: " + timeRemaining;
 
-        questionsSection.appendChild(pEl2);
+        questioncontainer.appendChild(pEl2);
     }
 
-    // User prompted to enter intials
+    // User prompted to enter name
 
-    var enterInitials = document.createElement("initials");
-    enterInitials.setAttribute("id", "enterInitials");
-    enterInitials.textContent = "Enter your initials: ";
+    var enterName = document.createElement("name");
+    enterName.setAttribute("id", "enterName");
+    enterName.textContent = "Enter your name: ";
 
-    questionsSection.appendChild(enterInitials);
+    questioncontainer.appendChild(enterName);
 
-    // Enter initials
+    // Enter name
 
     var userInput = document.createElement("input");
     userInput.setAttribute("type", "text");
-    userInput.setAttribute("id", "initials");
+    userInput.setAttribute("id", "name");
     userInput.textContent = "";
 
-    questionsSection.appendChild(userInput);
+    questioncontainer.appendChild(userInput);
 
     // Submit user information
 
-    var initialsSubmit = document.createElement("button");
-    initialsSubmit.setAttribute("class", "btn btn-light");
-    initialsSubmit.setAttribute("type", "submit");
-    initialsSubmit.setAttribute("id", "submit");
-    initialsSubmit.textContent = "Submit";
+    var nameSubmit = document.createElement("button");
+    nameSubmit.setAttribute("class", "btn btn-light");
+    nameSubmit.setAttribute("type", "submit");
+    nameSubmit.setAttribute("id", "submit");
+    nameSubmit.textContent = "Submit";
 
-    questionsSection.appendChild(initialsSubmit);
+    questioncontainer.appendChild(nameSubmit);
 
-    // Event listener to capture initials and score in local storage 
+    // Event listener to enter name and score in local storage 
 
-    initialsSubmit.addEventListener("click", function (event) {
+    nameSubmit.addEventListener("click", function (event) {
         event.preventDefault();
-        var initials = userInput.value;
-        console.log(initials);
-        if (!initials) {
+        var name = userInput.value;
+        if (!name) {
             document.querySelector("#submit").textContent = "Enter a valid value!";
-            console.log(initialsSubmit);
         }
         else {
             var finalScore = {
-                initials: initials,
+                name: name,
                 score: timeRemaining
             }
 
             // Clearing HTML at #questionSection 
 
-            document.querySelector("#questionsSection").innerHTML = "";
+            document.querySelector("#questioncontainer").innerHTML = "";
 
             // Create High Scores page heading
 
@@ -231,19 +222,19 @@ function quizComplete() {
 
             // Append element to page
 
-            questionsSection.appendChild(h2El);
+            questioncontainer.appendChild(h2El);
 
-            allScores.push(finalScore);
-            var newScore = JSON.stringify(allScores);
-            localStorage.setItem("allScores", newScore);
+            totalScores.push(finalScore);
+            var newScore = JSON.stringify(totalScores);
+            localStorage.setItem("totalScores", newScore);
 
             // Adds score to final page
 
-            for (let i = 0; i < allScores.length; i++) {
-                const el = allScores[i].initials + " " + allScores[i].score;
+            for (let i = 0; i < totalScores.length; i++) {
+                const el = totalScores[i].name + " " + totalScores[i].score;
                 var li2 = document.createElement("li");
                 li2.textContent = el;
-                var ul = document.querySelector("#highScoresUl");
+                var ul = document.querySelector("#topScoresUl");
                 ul.appendChild(li2);
 
             }

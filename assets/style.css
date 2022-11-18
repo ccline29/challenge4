@@ -1,5 +1,5 @@
 * {
-    background-color: rgb(7, 249, 47);
+    background-color: lawngreen;
 }
 
 /* Global */
@@ -9,7 +9,7 @@ html {
 }
 
 body {
-    color: rgb(7, 249, 47);
+    color: rgba(255,255,255,.75);
     font-family: 'Courier New', Courier, monospace;
     background-color: transparent;  
 }
@@ -27,27 +27,6 @@ body {
     transform: translateY(-50%);   
     background-color: transparent; 
 }
-  
-/* Animation */
-.typewriter {
-    animation: typewriter 4s steps(44) 1s 1 normal both,
-               blinkTextCursor 500ms steps(44) infinite normal;    
-}
-
-@keyframes typewriter {
-    from{width: 0;}
-    to{width: 22em;}
-} 
-
-@keyframes blinkTextCursor {
-    from{border-right-color: rgba(74, 112, 238, 0.75);}
-    to{border-right-color: transparent;}
-}
- 
-body, .jumbotron {
-    background-color: rgb(7, 249, 47);
-    align-items: center;
-}
 
 .quiz {
     width: 900px;
@@ -55,26 +34,26 @@ body, .jumbotron {
     
 ul, li, h1, p, div {
     color: black;
-    background-color: rgb(7, 249, 47);
+    background-color: lawngreen;
 }
 
 ul, li {
     text-align: center;
     list-style-type: none;
-    background-color: rgb(7, 249, 47);
+    background-color: lawngreen;
 }
 
 .card-body, p.text {
     background-color: transparent;
     color: #FFFFFF;
     font-size: 1.5rem;
-    text-shadow: 2px 2px rgb(7, 249, 47);
+    text-shadow: 2px 2px black;
     font-family: sans-serif;
 }
 
 .btn {
-    background-color: rgb(94, 205, 238);
-    border-color: rgb(94, 205, 238);
+    background-color: cornflowerblue;
+    border-color: cornflowerblue;
     color: #FFFFFF;
     cursor: pointer;
 }
@@ -88,7 +67,7 @@ ul, li {
 ul, div#questionsSection {
     align-items: center;
     text-align: center; 
-    background-color: rgb(7, 249, 47);
+    background-color: lawngreen;
     color: white;
     font-size: 1.25em; 
     cursor: pointer;
@@ -113,7 +92,7 @@ ul, div#questionsSection::after {
 #h1El {
     padding-top: 140px;
     text-align: center;  
-    color: black; 
+    color: cornflowerblue; 
 }
 
 #pEl {
@@ -127,18 +106,18 @@ ul, div#questionsSection::after {
 
 #h2El {
     padding-top: 90px;
-    color: rgb(94, 205, 238);
+    color: cornflowerblue;
     text-align: center;
 } 
 
-#enterInitials, input#Initials {
+#entername, input#name {
     text-align: center;
-    background-color: rgb(7, 249, 47);
+    background-color: black;
     color: white;
     outline: none !important;
 }
 
-ul#highScoresUl, ul#questionsUl {
+ul#topScoresUl, ul#questionsUl {
     padding-top: 0px;
     text-align: center;
     align-items: center;
@@ -160,32 +139,15 @@ ul#highScoresUl, ul#questionsUl {
     margin-top: 120px;
 }
 
-.onomatopoetica {
-    color: black;
-}
   
 #content-wrap {
     padding-bottom: .5rem; /* Footer height */
 }
   
-#footer, .madewithgusto {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 2.5rem; /* Footer height */
-    background-color: transparent;
-    color: rgb(94, 205, 238);
-    text-align: center;            
-}
-
 /* Smaller screens */
 @media (max-width: 1050px) {
     div.hometimer {
         font-size: .85;
-    }
-    
-    .typewriter {
-        font-size: 1rem;
     }
     
     img.quiz {
@@ -195,7 +157,7 @@ ul#highScoresUl, ul#questionsUl {
     .card-body, p.text {
         background-color: transparent;
         color: #FFFFFF;
-        text-shadow: 1px 1px rgb(7, 249, 47);
+        text-shadow: 1px 1px black;
         font-size: .85rem;
         padding: none;
         margin: none;
@@ -203,7 +165,7 @@ ul#highScoresUl, ul#questionsUl {
  
     .luck {
         font-size: 1rem;
-        text-shadow: 1px 1px rgb(7, 249, 47);
+        text-shadow: 1px 1px black;
     }
 
     ul, div#questionsSection {
@@ -213,8 +175,4 @@ ul#highScoresUl, ul#questionsUl {
         align-items: center;
     }
      
-    .madeWithLove {
-        font-size: .55rem;
-        font-family: 'Courier New', Courier, monospace;
-    }
 }
